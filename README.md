@@ -13,7 +13,7 @@ Because dynamic SBM: by-production technologies could improve the accuracy of ef
 Tone, K., & Tsutsui, M., 2014. Dynamic DEA with network structure: A slacks-based measure approach. Omega, 42(1), 124-131.
 
 ### 1.4 Problem Definition
-We would like to calculate the overall and period efficiency of each city from 2014 to 2019. Traditinal methods only calculate the overall efficiency with free disposable input. To measure the efficiency accurately, we use dynamic SBM with by-product technologies to justify the result.
+We would like to calculate the overall and period efficiency of each city in Taiwan from 2014 to 2019. Traditinal methods only calculate the overall efficiency with free disposable input. To measure the efficiency accurately, we use dynamic SBM with by-product technologies to justify the result.
 
 
 ## 2 Methodology
