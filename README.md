@@ -17,6 +17,12 @@ We would like to calculate the overall and period efficiency of each city in Tai
 
 
 ## 2 Methodology
+This section 
+
+### 2.1 Dynamic SBM: by-production technologies
+### 2.2 Free Disposable Input
+### 2.3 Malmquist-Luenberger Index
+
 
 ## 3 Data Collection and Analysis Result
 This section will explain how the data we used were collected and the columns of the data. The following is the analysis results of comparison between by-production and free-disposable input as well as the productivity change from Malmquist-Luenberger Index.  
