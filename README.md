@@ -34,6 +34,10 @@ This section will explain how the data we used were collected and the columns of
 ### 3.1 Data Collection
 Our dataset includes five kinds of data: non pollution input-tax revenue (million), pollution input-coal (million ton), desirable output-GDP (million), undesirable output-trash (ton), and free/fixed link-labor (thousand people). Each city in Taiwan has the data from 2014 to 2019. The data of tax revenue, trash, and labor were obtained by [national statistics](https://winsta.dgbas.gov.tw/DgbasWeb/ZWeb/StateFile_ZWeb.aspx). The amount of coal and GDP were multiplied the amount of coal in use and GDP person by the number of population in cities. The calculation of the amount of coal per person is first to convert the amount of used electricity to the amount of used coal in Taiwan. Next, the amount of used coal in each city is in proportion to the number of population. As for the GDP per person, we first gained GDP per person from 2014 to 2019 from [national statistics](https://winsta.dgbas.gov.tw/DgbasWeb/ZWeb/StateFile_ZWeb.aspx), and then multiplied the number of population by GDP per person to get GDP of each city.
 
+### 3.2 Result of by-production DSBM
+
+### 3.3 Comparison between by-production and free disposable input
+
 
 ## 4 Conclusion
 
