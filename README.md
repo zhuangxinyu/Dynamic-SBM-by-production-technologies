@@ -46,7 +46,7 @@ $Y^t_{kj}$: jth good output of DMU k at period $t$
 $B^t_{kj}$: jth bad output of DMU k at period $t$
 
 #### Decision Variables
-$\lambda^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$, multiply   
+$\lambda^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$, multiply $tau$  
 $\mu^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$, multiply $\tau$
 
 $s_i^{tN-}$: slack of ith non-pollution-causing input at period $t$, multiply $\tau$ (frontier of good output)  
