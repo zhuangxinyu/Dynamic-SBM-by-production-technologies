@@ -46,14 +46,14 @@ $Y^t_{kj}$: jth good output of DMU k at period $t$
 $B^t_{kj}$: jth bad output of DMU k at period $t$
 
 #### Decision Variables
-$\lambda^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$, multiply $\tau$  
+$\lambda^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$, multiply   
 $\mu^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$, multiply $\tau$
 
 $s_i^{tN-}$: slack of ith non-pollution-causing input at period $t$, multiply $\tau$ (frontier of good output)  
 $s_j^{tN+}$: slack of jth good output at period $t$, multiply $\tau$ (frontier of good output)  
 $s_i^{tGP-}$: slack of ith pollution-causing input at period $t$, multiply $\tau$ (frontier of good output)  
 $s_j^{tP+}$: slack of jth bad output at period $t$, multiply $\tau$ (frontier of bad output)  
-$s_i^{tBP-}$: slack of ith pollution-causing input at period $t$, multiply $\tau$(frontier of bad output)  
+$s_i^{tBP-}$: slack of ith pollution-causing input at period $t$, multiply $\tau$ (frontier of bad output)  
 $s^{free}_{it}$: slack of ith free carry-over at period $t$, multiply $\tau$  
 
 $\tau$: for linearizing the NLP
@@ -61,7 +61,7 @@ $\tau$: for linearizing the NLP
 #### Model
 
 
-Below is a general form of DDF in the paper.  
+Below is a formulation of DDF in the paper.  
 We called the constraint(1)(2) **Input Constraint**, and (1) use the X we want to consider in the model. The same as the following constraints, so constraint(3)(4) are **Desirable Output Constraint**, and constraint(5)(6) are **Undesirable Output Constraint**. Constraint(1)(3)(5) are the X,Y,B we want to consider, on the contrary, constraint(2)(4)(6) are those we don't sonsider in the model. The last constraint (7) is the **Convex-Combination Constraint**.
 
 Take a look at the <img src="https://latex.codecogs.com/svg.image?g^{Y_i}" /> and <img src="https://latex.codecogs.com/svg.image?g^{B_q}" /> in the constraint (3) and (5). They mean the direction that raw data will project to, and we can see that the efficiency is plused in Y and minused in B. For the opposite direction, it is because the undesirable output is a by-product of desirable output, and we want the desirable output higher while the undesirable output could be lower. But notice that the relation between desirable output and undesirable output is not trade-off. In fact, when we increase the desirable output, the undesirable output will increase simultaneously.
