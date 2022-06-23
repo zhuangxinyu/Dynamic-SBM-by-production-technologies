@@ -17,12 +17,16 @@ We would like to calculate the overall and period efficiency of each city in Tai
 
 
 ## 2 Methodology
-This section our method is base on the paper Dynamic DEA: A slack-based measure approach published by Tone and tsutsui, but deal with bad output by by-production method instead of considering it as free disposable inputs and see if this method is better.
+Based on Dynamic DEA: A slack-based measure approach published by Tone and tsutsui [[3]](#3), we first construct a model according to the paper, and then deal with bad output by by-production method instead of considering it as free disposable inputs.
 we also try to calculate Malmquist-Luenberger Index to find out the efficiency change through the periods.
 
 <a id="2.1"></a> 
-### 2.1 Dynamic SBM: by-production technologies
-### 2.2 Free Disposable Input
+### 2.1 Dynamic SBM: consider bad output as free disposable input
+
+
+### 2.2 Dynamic SBM: by-production technologies
+
+
 ### 2.3 Malmquist-Luenberger Index
 When the DMU data is panel data containing multiple time points, the Malmquist total factor productivity index should be used to analyze efficiency change. Chung et al. [[2]](#2) proposed the Malmquist-Luenberger Index (ML index) based on the Malmquist model by applying a DDF containing the undesirable output. Any Malmquist index with undesirable output is called the ML productivity index [[1]](#1). Based on the method proposed by Chung et al. [[2]](#2), Li et al. [[1]](#1) proposed ML equation, combining the SBM model with undesirable output. Since their ML equation combining SBM model with undesirable output corresponds to our Dynamic SBM: by-production technologies [[2.1]](#2.1), we used their ML equation to implement Malquist-Luenberger Index. Its fixed ML index equation constructed in this paper is as follows: the common reference set of each period is $S_f = {(x^f_j, y^f_j, b^f_j)}$ , and $f$ is the number of 1 ~ period $p$. A single ML index is calculated. $ML^f_0 ( x^{t+1}_0 ,  y^{t+1}_0,  b^{t+1}_0,  x^t_0,  y^t_0,  b^t_0)  =  E^f_0 ( x^{t+1}_0 ,  y^{t+1}_0,  b^{t+1}_0 ) / E^f_0 ( x^t_0 ,  y^t_0,  b^t_0 )$. 
 
@@ -82,4 +86,5 @@ In conclusion, We used dynamic SBM to analyze the efficiency of each period. Com
 Li, Y., & Chen, Y. (2021). Development of an SBM-ML model for the measurement of green total factor productivity: The case of pearl river delta urban agglomeration. Renewable and Sustainable Energy Reviews, 145, 111131. <br>
 <a id="1">[2]</a> 
 Chung, Y. H., Färe, R., & Grosskopf, S. (1997). Productivity and undesirable outputs: a directional distance function approach. journal of Environmental Management, 51(3), 229-240.
-
+<a id="1">[3]</a> 
+Tone, K., Tsutsui, M., 2010. Dynamic DEA: A slack-based measure approach. Omega: Int. J. Manage. Sci. 38, 45–156.
