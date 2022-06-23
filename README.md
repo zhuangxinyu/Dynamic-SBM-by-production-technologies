@@ -37,10 +37,8 @@ $T$: periods
 $L_{free}$: free carry-overs
 
 #### Parameters
-
-$X^t_{ki}$: ith input of DMU k at period $t$  
-$Y^t_{kj}$: jth good output of DMU k at period $t$  
-$B^t_{kj}$: jth bad output of DMU k at period $t$
+$X^t_{ki}$: $i$th input of DMU $k$ at period $t$  
+$Y^t_{kj}$: $j$th good output of DMU $k$ at period $t$  
 
 #### Decision Variables
 $\lambda^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$, multiply $\tau$  
@@ -60,8 +58,9 @@ We called the constraint(1)(2) **Input Constraint**, and (1) use the X we want t
 
 Take a look at the <img src="https://latex.codecogs.com/svg.image?g^{Y_i}" /> and <img src="https://latex.codecogs.com/svg.image?g^{B_q}" /> in the constraint (3) and (5). They mean the direction that raw data will project to, and we can see that the efficiency is plused in Y and minused in B. For the opposite direction, it is because the undesirable output is a by-product of desirable output, and we want the desirable output higher while the undesirable output could be lower. But notice that the relation between desirable output and undesirable output is not trade-off. In fact, when we increase the desirable output, the undesirable output will increase simultaneously.
 
+<img width="427" alt="DSBM_free disposable input" src="https://user-images.githubusercontent.com/47711803/175358906-91200992-9a7c-43e4-b41b-56d1d7904d4a.png">
 
-<img width="380" alt="DSBM_free disposable input" src="https://user-images.githubusercontent.com/47711803/175357234-fc22b533-3b6b-4f79-b14c-0c2beafed202.png">
+
 
 
 In this study, we want to focus on one input (Coal), one output (Electricity), and three bad outputs(CO<sub>2</sub>,SO<sub>2</sub>,NO<sub>x</sub>) here, so we can simplify the model as:
@@ -153,7 +152,7 @@ With the overall efficiency $\theta$, we can calculate the period efficiency of 
 $i$: input  
 $j$: output  
 $k$: DMU  
-$t$: period
+$t$: period  
 $l$: carry-over
 
 #### Sets
@@ -162,30 +161,28 @@ $I^P$: pollution-causing inputs
 $J^N$: good outputs  
 $J^P$: bad outputs  
 $K$: DMUs  
-$T$: periods
-$L_free$: free carry-overs
+$T$: periods  
+$L_{free}$: free carry-overs
 
 #### Parameters
-$X^{t}_{ki}$: ith input of DMU k at period $t$  
-$Y^{t}_{kj}$: jth good output of DMU k at period $t$  
-$B^{t}_{kj}$: jth bad output of DMU k at period $t$
+$X^t_{ki}$: ith input of DMU k at period $t$  
+$Y^t_{kj}$: jth good output of DMU k at period $t$  
+$B^t_{kj}$: jth bad output of DMU k at period $t$
 
 #### Decision Variables
 $\lambda^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$, multiply $\tau$  
-$\mu^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$, multiply $\tau$
-
+$\mu^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$, multiply $\tau$  
 $s_i^{tN-}$: slack of ith non-pollution-causing input at period $t$, multiply $\tau$ (frontier of good output)  
 $s_j^{tN+}$: slack of jth good output at period $t$, multiply $\tau$ (frontier of good output)  
 $s_i^{tGP-}$: slack of ith pollution-causing input at period $t$, multiply $\tau$ (frontier of good output)  
 $s_j^{tP+}$: slack of jth bad output at period $t$, multiply $\tau$ (frontier of bad output)  
 $s_i^{tBP-}$: slack of ith pollution-causing input at period $t$, multiply $\tau$(frontier of bad output)  
 $s^{free}_{it}$: slack of ith free carry-over at period $t$, multiply $\tau$  
-
 $\tau$: for linearizing the NLP
 
 #### Model
 
-<img width="484" alt="DSBM_by-production" src="https://user-images.githubusercontent.com/47711803/175357282-322be347-3fb1-486e-8f7e-1f2bbf14267c.png">
+<img width="485" alt="DSBM_by-production" src="https://user-images.githubusercontent.com/47711803/175358935-b72183b3-a661-41e4-ba94-54e8c1bd54cf.png">
 
 
 
