@@ -39,7 +39,7 @@ $X^t_{ki}$: $i$ th input of DMU $k$ at period $t$
 $Y^t_{kj}$: $j$ th output of DMU $k$ at period $t$  
 
 #### Decision Variables
-$\lambda^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$ , multiply $\tau$  
+$\lambda^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$ , multiply τ  
 $s_i^{t-}$: slack of $i$ th input at period $t$ , multiply $\tau$  
 $s_j^{t+}$: slack of $j$ th output at period $t$ , multiply $\tau$  
 $s^{tC}_{l}$: slack of $l$ th free carry-over at period $t$ , multiply $\tau$  
@@ -47,18 +47,14 @@ $\tau$: for linearizing the NLP
 
 #### Model
 
-Below is a formulation of DDF in the paper.  
-We called the constraint(1)(2) **Input Constraint**, and (1) use the X we want to consider in the model. The same as the following constraints, so constraint(3)(4) are **Desirable Output Constraint**, and constraint(5)(6) are **Undesirable Output Constraint**. Constraint(1)(3)(5) are the X,Y,B we want to consider, on the contrary, constraint(2)(4)(6) are those we don't sonsider in the model. The last constraint (7) is the **Convex-Combination Constraint**.
-
-Take a look at the <img src="https://latex.codecogs.com/svg.image?g^{Y_i}" /> and <img src="https://latex.codecogs.com/svg.image?g^{B_q}" /> in the constraint (3) and (5). They mean the direction that raw data will project to, and we can see that the efficiency is plused in Y and minused in B. For the opposite direction, it is because the undesirable output is a by-product of desirable output, and we want the desirable output higher while the undesirable output could be lower. But notice that the relation between desirable output and undesirable output is not trade-off. In fact, when we increase the desirable output, the undesirable output will increase simultaneously.
-
-
+Below is the formulation of dynamic SBM in the paper [[2]](#2), and we choose the non-oriented model.  
+The constraint (1) is the **output constraint**, constraint (2) is the **input constraint**, and constraint (3) and (4) are for **conservation of mass** of each carry-overs. We let the left hand side of constraint (5) be 1 so that the objective function can be linear. And constraint (6) is for VRS.
 
 <img width="435" alt="DSBM_free disposable input" src="https://user-images.githubusercontent.com/47711803/175364642-5fea9174-5b57-4e26-936f-df210d63a811.png">
 
+After finding out the overall efficiency for each DMU, we can calculate the corresponding period efficiency by the function below.
 
-
-In this study, we want to focus on one input (Coal), one output (Electricity), and three bad outputs(CO<sub>2</sub>,SO<sub>2</sub>,NO<sub>x</sub>) here, so we can simplify the model as:
+<img width="459" alt="period efficiency" src="https://user-images.githubusercontent.com/47711803/175375635-eafafcda-dd54-4d7c-a65a-0bb0fafd9aa9.png">
 
 
 #### Source Code(python-gurobi)
@@ -137,7 +133,9 @@ def DynamicSBM(Carry_Labor, Input_Tax, Input_Population, Output_Trash, Output_GD
     return D_SBM, no_year
 ```
 
-With the overall efficiency $\theta$, we can calculate the period efficiency of each DMU.
+With the overall efficiency $\theta$, we can calculate the period efficiency of each DMU.  
+However, this method consider bad output as free disposable input, but there will be some problem at free disposable hole, e.g., good output increases while the bad output remain the same. Therefore we try the by-production method.
+
 
 
 
@@ -176,10 +174,14 @@ $s^{tC}_{l}$: slack of $i$ th free carry-over at period $t$, multiply $\tau$
 $\tau$: for linearizing the NLP
 
 #### Model
+Based on the formulation in [[2.1]](#2.1), we developed dynamic SBM with by-production technology.  
+Below is our formulation. Constraint (1), (2), (3) form the **frontier of good output**, constraint (4) and (5) form the **frontier of bad output**, and constraint (6) and (7) are for **conservation of mass** of each carry-overs. We let the left hand side of constraint (8) be 1 so that the objective function can be linear. And constraint (9) and (10) are for VRS.
+
 <img width="491" alt="DSBM_by-production" src="https://user-images.githubusercontent.com/47711803/175364674-e60a1a80-3142-460b-8a8a-9fa550bb99e5.png">
 
+After finding out the overall efficiency for each DMU, we can calculate the corresponding period efficiency by the function below.
 
-
+<img width="459" alt="period efficiency" src="https://user-images.githubusercontent.com/47711803/175375635-eafafcda-dd54-4d7c-a65a-0bb0fafd9aa9.png">
 
 
 #### Source Code(python-gurobi)
@@ -277,7 +279,7 @@ def DynamicSBM_Byproduction(Carry_Labor, Input_Tax, Input_Population, Output_Tra
     return BP_D_SBM, bp_year
 ```
 
-With the overall efficiency $\theta$, we can calculate the period efficiency of each DMU.
+With the overall efficiency $\theta$, we can calculate the period efficiency of each DMU, and observe the trend of efficiency growth in order to find out the way to improve efficiency.
 
 
 
