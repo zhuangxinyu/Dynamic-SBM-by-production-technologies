@@ -41,7 +41,7 @@ $X^t_{ki}$: $i$ th input of DMU $k$ at period $t$
 $Y^t_{kj}$: $j$ th good output of DMU $k$ at period $t$  
 
 #### Decision Variables
-$\lambda^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$ , multiply $\tau$  
+$\lambda^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$ , multiply $ \tau$  
 $\mu^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$ , multiply $\tau$  
 $s_i^{tN-}$: slack of ith non-pollution-causing input at period $t$ , multiply $\tau$ (frontier of good output)  
 $s_j^{tN+}$: slack of jth good output at period $t$ , multiply $\tau$ (frontier of good output)  
