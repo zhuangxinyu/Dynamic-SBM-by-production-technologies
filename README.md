@@ -58,14 +58,7 @@ $s^{free}_{it}$: slack of ith free carry-over at period $t$, multiply $\tau$
 $\tau$: for linearizing the NLP
 
 #### Model
-Below is a general form of DDF in the paper.  
-We called the constraint(1)(2) **Input Constraint**, and (1) use the X we want to consider in the model. The same as the following constraints, so constraint(3)(4) are **Desirable Output Constraint**, and constraint(5)(6) are **Undesirable Output Constraint**. Constraint(1)(3)(5) are the X,Y,B we want to consider, on the contrary, constraint(2)(4)(6) are those we don't sonsider in the model. The last constraint (7) is the **Convex-Combination Constraint**.
 
-Take a look at the <img src="https://latex.codecogs.com/svg.image?g^{Y_i}" /> and <img src="https://latex.codecogs.com/svg.image?g^{B_q}" /> in the constraint (3) and (5). They mean the direction that raw data will project to, and we can see that the efficiency is plused in Y and minused in B. For the opposite direction, it is because the undesirable output is a by-product of desirable output, and we want the desirable output higher while the undesirable output could be lower. But notice that the relation between desirable output and undesirable output is not trade-off. In fact, when we increase the desirable output, the undesirable output will increase simultaneously.
-
-
-
-In this study, we want to focus on one input (Coal), one output (Electricity), and three bad outputs(CO<sub>2</sub>,SO<sub>2</sub>,NO<sub>x</sub>) here, so we can simplify the model as:
 
 
 
@@ -151,7 +144,141 @@ With the overall efficiency $\theta$, we can calculate the period efficiency of 
 
 <a id="2.2"></a> 
 ### 2.2 Dynamic SBM: by-production technologies
+#### Indices
+$i$: input  
+$j$: output  
+$k$: DMU  
+$t$: period
+$l$: carry-over
 
+#### Sets
+$I^N$: non-pollution-causing inputs  
+$I^P$: pollution-causing inputs  
+$J^N$: good outputs  
+$J^P$: bad outputs  
+$K$: DMUs  
+$T$: periods
+$L_free$: free carry-overs
+
+#### Parameters
+$X^{t}_{ki}$: ith input of DMU k at period $t$  
+$Y^{t}_{kj}$: jth good output of DMU k at period $t$  
+$B^{t}_{kj}$: jth bad output of DMU k at period $t$
+
+#### Decision Variables
+$\lambda^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$, multiply $\tau$  
+$\mu^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$, multiply $\tau$
+
+$s_i^{tN-}$: slack of ith non-pollution-causing input at period $t$, multiply $\tau$ (frontier of good output)  
+$s_j^{tN+}$: slack of jth good output at period $t$, multiply $\tau$ (frontier of good output)  
+$s_i^{tGP-}$: slack of ith pollution-causing input at period $t$, multiply $\tau$ (frontier of good output)  
+$s_j^{tP+}$: slack of jth bad output at period $t$, multiply $\tau$ (frontier of bad output)  
+$s_i^{tBP-}$: slack of ith pollution-causing input at period $t$, multiply $\tau$(frontier of bad output)  
+$s^{free}_{it}$: slack of ith free carry-over at period $t$, multiply $\tau$  
+
+$\tau$: for linearizing the NLP
+
+#### Model
+
+
+
+
+#### Source Code(python-gurobi)
+
+We use python with gurobi to implement the model.  
+**Carry_Labor**, **Input_Tax**, **Input_Population**, **Output_Trash**, **Output_GDP** are the carry-overs, the non-pollution-causing inputs, the pollution-causing inputs, the bad outputs, and the good outputs, respectively. **K** is the set of the Cities of Taiwan (DMU), and **Year** is the set of the periods.
+
+```python
+def DynamicSBM_Byproduction(Carry_Labor, Input_Tax, Input_Population, Output_Trash, Output_GDP, K, Year):
+    T = len(Year)
+    Type = ['bp_VRS_free', 'bp_VRS_fix', 'bp_CRS_free', 'bp_CRS_fix']
+    C = {'Labor'} # carry over
+    M = {'GDP'} # desirable outputs
+    J = {'Trash'} # undesirable outputs
+    N = {'Tax'} # sub non-pollution-causing inputs
+    P = {'Population'} # sub pollution-causing inputs
+    
+    X = {} #Input
+    Z = {} # free carry over
+    for k in range(len(K)):
+        Z[K[k],'Labor'] = Carry_Labor[k]
+        X[K[k],'Population'] = Input_Population[k]
+        X[K[k],'Tax'] = Input_Tax[k]
+    Y = {} # Good Ouput
+    B = {}  # Bad Output
+    for k in range(len(K)):
+        B[K[k],'Trash'] = Output_Trash[k]
+        Y[K[k],'GDP'] = Output_GDP[k]   
+        
+    BP_D_SBM = {}
+    bp_year = {}
+
+    for i in range(len(Type)):
+        all_temp = {}
+        part_temp = {}
+        for firm in K:
+            model = Model('byProductDynamicSBM')
+            model.setParam('OutputFlag', 0)
+
+            Lambda, Mu = {}, {}
+            a = model.addVar(vtype = "C", name = "a",lb=0.0000001)
+            S_free, S_Npos, S_Nmin, S_GPmin, S_Ppos, S_BPmin = {}, {}, {}, {}, {}, {}
+            for t in range(T):
+                for k in K:
+                    Lambda[k, t] = model.addVar(vtype = "C", name = "Lambda(%s)(%s)"%(k, t),lb=0)
+                    Mu[k, t] = model.addVar(vtype = "C", name = "Mu(%s)(%s)"%(k, t),lb=0)
+                for m in M:
+                    S_Npos[m, t] = model.addVar(vtype = "C", name = "S_N+(%s)(%s)"%(m, t),lb=0)
+                for j in J:
+                    S_Ppos[j, t] = model.addVar(vtype = "C", name = "S_P+(%s)(%s)"%(j, t),lb=0)
+                for n in N:
+                    S_Nmin[n, t] = model.addVar(vtype = "C", name = "S_N-(%s)(%s)"%(n, t),lb=0)
+                for c in C:
+                    S_free[c, t] = model.addVar(vtype = "C", name = "S_free(%s)(%s)"%(c, t),lb=-GRB.INFINITY)
+                for p in P:
+                    S_GPmin[p, t] = model.addVar(vtype = "C", name = "S_GP-(%s)(%s)"%(p, t),lb=0)
+                    S_BPmin[p, t] = model.addVar(vtype = "C", name = "S_BP-(%s)(%s)"%(p, t),lb=0)
+            model.update()
+            model.setObjective(quicksum(a - (quicksum(S_Nmin[n, t]/X[firm, n][t] for n in N) \
+                + (quicksum(S_GPmin[p, t]/X[firm, p][t] for p in P) + quicksum(S_BPmin[p, t]/X[firm, p][t] for p in P)) / 2) \
+                / (len(N) + len(P)) for t in range(T)) / T, GRB.MINIMIZE)
+            for t in range(T):
+                model.addConstr(1 == a + (quicksum(S_Npos[m, t]/Y[firm, m][t] for m in M) + quicksum(S_Ppos[j, t]/B[firm, j][t] for j in J)) / (len(M) + len(J)))
+                if(i < 2):
+                    model.addConstr(quicksum(Lambda[k, t] for k in K) == 1)
+                    model.addConstr(quicksum(Mu[k, t] for k in K) == 1)
+
+                for m in M:
+                    model.addConstr(quicksum(Lambda[k, t] * Y[k, m][t] for k in K) - S_Npos[m, t] == a * Y[firm, m][t])
+                for j in J:
+                    model.addConstr(quicksum(Mu[k, t] * B[k, j][t] for k in K) - S_Ppos[j, t] == a * B[firm, j][t])
+                for n in N:
+                    model.addConstr(quicksum(Lambda[k, t] * X[k, n][t] for k in K) + S_Nmin[n, t] == a * X[firm, n][t])
+                for p in P:
+                    model.addConstr(quicksum(Lambda[k, t] * X[k, p][t] for k in K) + S_GPmin[p, t] == a * X[firm, p][t])
+                    model.addConstr(quicksum(Mu[k, t] * X[k, p][t] for k in K) + S_BPmin[p, t] == a * X[firm, p][t])
+            for t in range(T-1):
+                for c in C:
+                    if(i % 2 == 0):
+                        model.addConstr(quicksum(Lambda[k, t] * Z[k, c][t] for k in K) + S_free[c, t] == a * Z[firm, c][t])
+                    else:
+                        model.addConstr(quicksum(Lambda[k, t] * Z[k, c][t] for k in K) == a * Z[firm, c][t]) # fix
+                    model.addConstr(quicksum(Lambda[k, t] * Z[k, c][t] for k in K) == quicksum(Lambda[k, t + 1] * Z[k, c][t] for k in K))
+            model.optimize()
+            all_temp[firm] = model.objVal
+
+            temp = []
+            for t in range(T):
+                temp.append((LinExpr.getValue(a - (LinExpr.getValue(quicksum(S_Nmin[n, t]/X[firm, n][t] for n in N)) 
+                                + (LinExpr.getValue((quicksum(S_GPmin[p, t]/X[firm, p][t] for p in P)))
+                                + LinExpr.getValue(quicksum(S_BPmin[p, t]/X[firm, p][t] for p in P)))/2) / (len(N) + len(P)))))
+            part_temp[firm] = temp
+        BP_D_SBM[Type[i]] = all_temp
+        bp_year[Type[i]] = part_temp
+    return BP_D_SBM, bp_year
+```
+
+With the overall efficiency $\theta$, we can calculate the period efficiency of each DMU.
 
 
 
