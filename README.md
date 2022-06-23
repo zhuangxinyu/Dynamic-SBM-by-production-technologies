@@ -23,79 +23,137 @@ we also try to calculate Malmquist-Luenberger Index to find out the efficiency c
 
 ### 2.1 Dynamic SBM: consider bad output as free disposable input
 
-
 #### Indices
-$X^t_k$: the non-pollution-causing input  
-$X^{tN}_{ki}$: the pollution-causing input  
-: the good output  
-: the bad output  
-: the firm
+$i$: input  
+$j$: output  
+$k$: DMU  
+$t$: period
+$l$: carry-over
 
 #### Sets
-: Input, <img src="https://latex.codecogs.com/svg.image?i\in%20I" />  
-: Output, <img src="https://latex.codecogs.com/svg.image?j\in%20J" />  
-: Pollutants, <img src="https://latex.codecogs.com/svg.image?q\in%20Q" />  
-: States in US, <img src="https://latex.codecogs.com/svg.image?k\in%20K" />
+$I^N$: non-pollution-causing inputs  
+$I^P$: pollution-causing inputs  
+$J^N$: good outputs  
+$J^P$: bad outputs  
+$K$: DMUs  
+$T$: periods
+$L_free$: free carry-overs
 
 #### Parameters
-: ith input of firm k  
-: jth good output of firm k  
-: qth bad output of firm k
-
-<img src="https://latex.codecogs.com/svg.image?g^{Y_j}" /> : direction of jth good output  
-<img src="https://latex.codecogs.com/svg.image?g^{B_q}" /> : direction of qth bad output
+$X^{t}_{ki}$: ith input of DMU k at period $t$  
+$Y^{t}_{kj}$: jth good output of DMU k at period $t$  
+$B^{t}_{kj}$: jth bad output of DMU k at period $t$
 
 #### Decision Variables
+$\lambda^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$, multiply $\tau$  
+$\mu^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$, multiply $\tau$
 
-<img src="https://latex.codecogs.com/svg.image?\lambda" /> : intensity weights representing the convex combination between firms  
-<img src="https://latex.codecogs.com/svg.image?\mu" /> : intensity weights representing the convex combination between firms  
-<img src="https://latex.codecogs.com/svg.image?\eta" /> : efficiency  
+$s_i^{tN-}$: slack of ith non-pollution-causing input at period $t$, multiply $\tau$ (frontier of good output)  
+$s_j^{tN+}$: slack of jth good output at period $t$, multiply $\tau$ (frontier of good output)  
+$s_i^{tGP-}$: slack of ith pollution-causing input at period $t$, multiply $\tau$ (frontier of good output)  
+$s_j^{tP+}$: slack of jth bad output at period $t$, multiply $\tau$ (frontier of bad output)  
+$s_i^{tBP-}$: slack of ith pollution-causing input at period $t$, multiply $\tau$(frontier of bad output)  
+$s^{free}_{it}$: slack of ith free carry-over at period $t$, multiply $\tau$  
 
-#### DDF Model
+$\tau$: for linearizing the NLP
 
+#### Model
 Below is a general form of DDF in the paper.  
 We called the constraint(1)(2) **Input Constraint**, and (1) use the X we want to consider in the model. The same as the following constraints, so constraint(3)(4) are **Desirable Output Constraint**, and constraint(5)(6) are **Undesirable Output Constraint**. Constraint(1)(3)(5) are the X,Y,B we want to consider, on the contrary, constraint(2)(4)(6) are those we don't sonsider in the model. The last constraint (7) is the **Convex-Combination Constraint**.
 
 Take a look at the <img src="https://latex.codecogs.com/svg.image?g^{Y_i}" /> and <img src="https://latex.codecogs.com/svg.image?g^{B_q}" /> in the constraint (3) and (5). They mean the direction that raw data will project to, and we can see that the efficiency is plused in Y and minused in B. For the opposite direction, it is because the undesirable output is a by-product of desirable output, and we want the desirable output higher while the undesirable output could be lower. But notice that the relation between desirable output and undesirable output is not trade-off. In fact, when we increase the desirable output, the undesirable output will increase simultaneously.
 
-<img src="https://i.imgur.com/qF9Mx0u.png" width="420" >  
+
 
 In this study, we want to focus on one input (Coal), one output (Electricity), and three bad outputs(CO<sub>2</sub>,SO<sub>2</sub>,NO<sub>x</sub>) here, so we can simplify the model as:
 
-<img src="https://i.imgur.com/Kyofriw.png" width="350" >
 
-#### Source Code(python-pulp)
 
-We use python with PuLP to implement the model.  
-**Xr**, **Yr** and **Br** are in respect of a state's **coal comsumption**, amount of **electricity productivity** and amount of **pollutant emission**. The other 2 parameters, **gY** and **gB**, represent the direction we want to project.
+#### Source Code(python-gurobi)
+
+We use python with gurobi to implement the model.  
+**Carry_Labor**, **Input_Tax**, **Input_Population**, **Output_Trash**, **Output_GDP** are the carry-overs, the non-pollution-causing inputs, the pollution-causing inputs, the bad outputs, and the good outputs, respectively. **K** is the set of the Cities of Taiwan (DMU), and **Year** is the set of the periods.
 
 ```python
-def DDF(Xr, Yr, Br, gY, gB):
-    # Decision variables
-    Eff = LpVariable('eff', lowBound=None, upBound=None, cat='Continuous')
-    Lambda = LpVariable.dicts('lambda', (K), lowBound=0, upBound=None, cat='Continuous')
-    Mu = LpVariable.dicts('mu', (K), lowBound=0, upBound=None, cat='Continuous')
+def DynamicSBM(Carry_Labor, Input_Tax, Input_Population, Output_Trash, Output_GDP, K, Year):
+    T = len(Year)
+    Type = ['VRS_free', 'VRS_fix', 'CRS_free', 'CRS_fix']
 
-    DDF = LpProblem('DDF_model', LpMaximize)
-    
-    # Objective function
-    DDF += Eff
+    C = {'Labor'} # carry over
+    M = {'GDP'} # Outputs
+    N = {'Tax', 'Population', 'Trash'} # Inputs
 
-    # Constraints
-    DDF += lpSum((Lambda[k]+Mu[k])*X[k] for k in K) <= Xr # I Constraint
-    DDF += lpSum(Lambda[k]*Y[k] for k in K) >= Yr + Eff*gY # GO Constraint
-    for q in Q:
-        modDDFel1 += lpSum(Lambda[k]*B[k,q] for k in K) <= Br[q] - Eff*gB[q] # BO Constraint
-    DDF += lpSum(Lambda[k]+Mu[k] for k in K) == 1 # Convex
-    
-    DDF.solve()
-    return (value(DDF.objective))
+    X = {} #Input
+    Z = {} # free carry over
+    for k in range(len(K)):
+        Z[K[k],'Labor'] = Carry_Labor[k]
+        X[K[k],'Population'] = Input_Population[k]
+        X[K[k],'Tax'] = Input_Tax[k]
+        X[K[k],'Trash'] = Output_Trash[k]
+    Y = {} # Ouput
+    for k in range(len(K)):
+        Y[K[k],'GDP'] = Output_GDP[k]  
+        
+    D_SBM = {}
+    no_year = {}
+
+    for i in range(len(Type)):
+        all_temp = {}
+        part_temp = {}
+        for firm in K:
+            model = Model('DynamicSBM')
+            model.setParam('OutputFlag', 0)
+
+            Lambda = {}
+            a = model.addVar(vtype = "C", name = "a", lb=0.0000001)
+            S_free, S_Npos, S_Nmin = {}, {}, {}
+            for t in range(T):
+                for k in K:
+                    Lambda[k, t] = model.addVar(vtype = "C", name = "Lambda(%s)(%s)"%(k, t),lb=0)
+                for m in M:
+                    S_Npos[m, t] = model.addVar(vtype = "C", name = "S_N+(%s)(%s)"%(m, t),lb=0)
+                for n in N:
+                    S_Nmin[n, t] = model.addVar(vtype = "C", name = "S_N-(%s)(%s)"%(n, t),lb=0)
+                for c in C:
+                    S_free[c, t] = model.addVar(vtype = "C", name = "S_free(%s)(%s)"%(c, t),lb=-GRB.INFINITY)
+            model.update()
+            model.setObjective(quicksum(a - quicksum(S_Nmin[n, t]/X[firm, n][t] for n in N) / len(N) for t in range(T)) / T, GRB.MINIMIZE)
+            for t in range(T):
+                model.addConstr(1 == a + quicksum(S_Npos[m, t]/Y[firm, m][t] for m in M) / len(M))
+                if(i < 2):
+                    model.addConstr(quicksum(Lambda[k, t] for k in K) == 1)
+                for m in M:
+                    model.addConstr(quicksum(Lambda[k, t] * Y[k, m][t] for k in K) - S_Npos[m, t] == a * Y[firm, m][t])
+                for n in N:
+                    model.addConstr(quicksum(Lambda[k, t] * X[k, n][t] for k in K) + S_Nmin[n, t] == a * X[firm, n][t])
+            for t in range(T-1):
+                for c in C:
+                    if(i % 2 == 0):
+                        model.addConstr(quicksum(Lambda[k, t] * Z[k, c][t] for k in K) + S_free[c, t] == a * Z[firm, c][t])
+                    else:   
+                        model.addConstr(quicksum(Lambda[k, t] * Z[k, c][t] for k in K) == a * Z[firm, c][t]) # fix
+                    model.addConstr(quicksum(Lambda[k, t] * Z[k, c][t] for k in K) == quicksum(Lambda[k, t + 1] * Z[k, c][t] for k in K))
+            model.optimize()
+            all_temp[firm] = model.objVal
+
+            temp = []
+            for t in range(T):
+                temp.append(LinExpr.getValue(a - (LinExpr.getValue(quicksum(S_Nmin[n, t]/X[firm, n][t] for n in N)/ len(N)))))
+            part_temp[firm] = temp
+        D_SBM[Type[i]] = all_temp
+        no_year[Type[i]] = part_temp
+    return D_SBM, no_year
 ```
 
-With the efficiency <img src="https://latex.codecogs.com/svg.image?\eta" />, we can project raw data to the frontier line. That is, the frontier data will be <img src="https://latex.codecogs.com/svg.image?{X_i,Y_j+\eta%20g^Y,B_q-\eta%20g^B}" />, which is the projection of raw data <img src="https://latex.codecogs.com/svg.image?{X_i,Y_j,B_q}" /> to the frontier line.
+With the overall efficiency $\theta$, we can calculate the period efficiency of each DMU.
+
+
 
 <a id="2.2"></a> 
 ### 2.2 Dynamic SBM: by-production technologies
+
+
+
 
 
 ### 2.3 Malmquist-Luenberger Index
