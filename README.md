@@ -9,15 +9,12 @@ In Taiwan, the government will not only deal with environmental problems, but al
 ### 1.2 Motivation
 Because dynamic SBM: by-production technologies could improve the accuracy of efficiency measurement and solved the problem of not containing slack variables when measuring the inefficiency rate of traditional radial models [[1]](#1). Therefore, we hope this research can give a good estimation of overall and period efficiency of cities, and can also give an insight to find the efficiency change of each city over the entire observed period. Especially, we would like to provide the efficiency analysis for **human resources department** which we regard it as the most important decision-making unit in the government based on the population in all province levels. 
 
-### 1.3 Paper Reproduction
-Tone, K., & Tsutsui, M., 2014. Dynamic DEA with network structure: A slacks-based measure approach. Omega, 42(1), 124-131.
-
-### 1.4 Problem Definition
+### 1.3 Problem Definition
 We would like to calculate the overall and period efficiency of each city in Taiwan from 2014 to 2019. Traditinal methods only calculate the overall efficiency with free disposable input. To measure the efficiency accurately, we use dynamic SBM with by-product technologies to justify the result.
 
 
 ## 2 Methodology
-We first construct a model based on Dynamic DEA: A slack-based measure approach published by Tone and tsutsui [[2]](#2), and then deal with bad output by by-production method instead of considering it as free disposable inputs.  
+We first construct a model based on Dynamic DEA: A slack-based measure approach published by Tone and Tsutsui [[2]](#2), and then deal with bad output by by-production method instead of considering it as free disposable inputs.  
 We also try to calculate Malmquist-Luenberger Index to find out the efficiency change through the periods.
 
 
@@ -36,7 +33,7 @@ $I^P$: pollution-causing inputs
 $J^N$: good outputs  
 $J^P$: bad outputs  
 $K$: DMUs  
-$T$: periods. 
+$T$: periods  
 $L_free$: free carry-overs
 
 #### Parameters
@@ -46,7 +43,7 @@ $Y^t_{kj}$: jth good output of DMU k at period $t$
 $B^t_{kj}$: jth bad output of DMU k at period $t$
 
 #### Decision Variables
-$\lambda^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$, multiply $tau$  
+$\lambda^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$, multiply $\tau$  
 $\mu^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$, multiply $\tau$
 
 $s_i^{tN-}$: slack of ith non-pollution-causing input at period $t$, multiply $\tau$ (frontier of good output)  
