@@ -17,7 +17,8 @@ We would like to calculate the overall and period efficiency of each city in Tai
 
 
 ## 2 Methodology
-This section (元婷這邊再寫一下簡短的summary of the methodlogy 感謝)
+This section our method is base on the paper Dynamic DEA: A slack-based measure approach published by Tone and tsutsui, but deal with bad output by by-production method instead of considering it as free disposable inputs and see if this method is better.
+we also try to calculate Malmquist-Luenberger Index to find out the efficiency change through the periods.
 
 <a id="2.1"></a> 
 ### 2.1 Dynamic SBM: by-production technologies
