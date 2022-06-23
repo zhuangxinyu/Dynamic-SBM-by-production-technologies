@@ -40,9 +40,9 @@ $Y^t_{kj}$: $j$ th output of DMU $k$ at period $t$
 
 #### Decision Variables
 $\lambda^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$ , multiply τ  
-$s_i^{t-}$: slack of $i$ th input at period $t$ , multiply $\tau$  
-$s_j^{t+}$: slack of $j$ th output at period $t$ , multiply $\tau$  
-$s^{tC}_{l}$: slack of $l$ th free carry-over at period $t$ , multiply $\tau$  
+$s_i^{t-}$: slack of $i$ th input at period $t$ , multiply τ  
+$s_j^{t+}$: slack of $j$ th output at period $t$ , multiply τ  
+$s^{tC}_{l}$: slack of $l$ th free carry-over at period $t$ , multiply τ  
 $\tau$: for linearizing the NLP
 
 #### Model
@@ -163,14 +163,14 @@ $Y^t_{kj}$: $j$ th good output of DMU $k$ at period $t$
 $B^t_{kj}$: $j$ th bad output of DMU $k$ at period $t$
 
 #### Decision Variables
-$\lambda^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$, multiply $\tau$  
-$\mu^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$, multiply $\tau$  
-$s_i^{tN-}$: slack of $i$ th non-pollution-causing input at period $t$, multiply $\tau$ (frontier of good output)  
-$s_j^{tN+}$: slack of $j$ th good output at period $t$, multiply $\tau$ (frontier of good output)  
-$s_i^{tGP-}$: slack of $i$ th pollution-causing input at period $t$, multiply $\tau$ (frontier of good output)  
-$s_j^{tP+}$: slack of $j$ th bad output at period $t$, multiply $\tau$ (frontier of bad output)  
-$s_i^{tBP-}$: slack of $i$ th pollution-causing input at period $t$, multiply $\tau$(frontier of bad output)  
-$s^{tC}_{l}$: slack of $i$ th free carry-over at period $t$, multiply $\tau$  
+$\lambda^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$, multiply τ  
+$\mu^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$, multiply τ  
+$s_i^{tN-}$: slack of $i$ th non-pollution-causing input at period $t$, multiply τ (frontier of good output)  
+$s_j^{tN+}$: slack of $j$ th good output at period $t$, multiply τ (frontier of good output)  
+$s_i^{tGP-}$: slack of $i$ th pollution-causing input at period $t$, multiply τ (frontier of good output)  
+$s_j^{tP+}$: slack of $j$ th bad output at period $t$, multiply τ (frontier of bad output)  
+$s_i^{tBP-}$: slack of $i$ th pollution-causing input at period $t$, multiply τ (frontier of bad output)  
+$s^{tC}_{l}$: slack of $i$ th free carry-over at period $t$, multiply τ  
 $\tau$: for linearizing the NLP
 
 #### Model
