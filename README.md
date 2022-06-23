@@ -84,7 +84,7 @@ In conclusion, We used dynamic SBM to analyze the efficiency of each period. Com
 ### Paper
 <a id="1">[1]</a> 
 Li, Y., & Chen, Y. (2021). Development of an SBM-ML model for the measurement of green total factor productivity: The case of pearl river delta urban agglomeration. Renewable and Sustainable Energy Reviews, 145, 111131. <br>
-<a id="1">[2]</a> 
+<a id="2">[2]</a> 
 Chung, Y. H., Färe, R., & Grosskopf, S. (1997). Productivity and undesirable outputs: a directional distance function approach. journal of Environmental Management, 51(3), 229-240.
-<a id="1">[3]</a> 
+<a id="3">[3]</a> 
 Tone, K., Tsutsui, M., 2010. Dynamic DEA: A slack-based measure approach. Omega: Int. J. Manage. Sci. 38, 45–156.
