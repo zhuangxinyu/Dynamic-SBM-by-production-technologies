@@ -44,16 +44,13 @@ $B^t_{kj}$: jth bad output of DMU k at period $t$
 
 #### Decision Variables
 $\lambda^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$, multiply $\tau$  
-
 $\mu^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$, multiply $\tau$  
-
 $s_i^{tN-}$: slack of ith non-pollution-causing input at period $t$, multiply $\tau$ (frontier of good output)  
 $s_j^{tN+}$: slack of jth good output at period $t$, multiply $\tau$ (frontier of good output)  
 $s_i^{tGP-}$: slack of ith pollution-causing input at period $t$, multiply $\tau$ (frontier of good output)  
 $s_j^{tP+}$: slack of jth bad output at period $t$, multiply $\tau$ (frontier of bad output)  
 $s_i^{tBP-}$: slack of ith pollution-causing input at period $t$, multiply $\tau$ (frontier of bad output)  
 $s^{free}_{it}$: slack of ith free carry-over at period $t$, multiply $\tau$  
-
 $\tau$: for linearizing the NLP
 
 #### Model
