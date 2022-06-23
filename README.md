@@ -43,7 +43,7 @@ $\lambda^t_k$: the intensity weights of the linear combination between DMU $r$ a
 $s_i^{t-}$: slack of $i$ th input at period $t$ , multiply τ  
 $s_j^{t+}$: slack of $j$ th output at period $t$ , multiply τ  
 $s^{tC}_{l}$: slack of $l$ th free carry-over at period $t$ , multiply τ  
-$\tau$: for linearizing the NLP
+τ: for linearizing the NLP
 
 #### Model
 
@@ -171,7 +171,7 @@ $s_i^{tGP-}$: slack of $i$ th pollution-causing input at period $t$, multiply τ
 $s_j^{tP+}$: slack of $j$ th bad output at period $t$, multiply τ (frontier of bad output)  
 $s_i^{tBP-}$: slack of $i$ th pollution-causing input at period $t$, multiply τ (frontier of bad output)  
 $s^{tC}_{l}$: slack of $i$ th free carry-over at period $t$, multiply τ  
-$\tau$: for linearizing the NLP
+τ: for linearizing the NLP
 
 #### Model
 Based on the formulation in [[2.1]](#2.1), we developed dynamic SBM with by-production technology.  
