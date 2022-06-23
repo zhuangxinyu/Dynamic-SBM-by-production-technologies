@@ -41,8 +41,10 @@ $L_free$: free carry-overs
 
 #### Parameters
 
-$X^{t}_{ki}$: ith input of DMU k at period $t$  
-$Y^{t}_{kj}$: jth good output of DMU k at period $t$  
+$X^{t}_{ki}$ : ith input of DMU k at period $t$  
+
+$Y^{t}_{kj}$ : jth good output of DMU k at period $t$  
+
 $B^{t}_{kj}$: jth bad output of DMU k at period $t$
 
 #### Decision Variables
