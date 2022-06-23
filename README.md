@@ -41,9 +41,9 @@ $L_free$: free carry-overs
 
 #### Parameters
 
-$X^{t}_{ki}$: ith input of DMU k at period $t$    <br>
-$Y^{t}_{kj}$: jth good output of DMU k at period $t$    
-$B^{t}_{kj}$: jth bad output of DMU k at period $t$
+$X^t_{ki}$: ith input of DMU k at period $t$  
+$Y^t_{kj}$: jth good output of DMU k at period $t$  
+$B^t_{kj}$: jth bad output of DMU k at period $t$
 
 #### Decision Variables
 $\lambda^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$, multiply $\tau$  
