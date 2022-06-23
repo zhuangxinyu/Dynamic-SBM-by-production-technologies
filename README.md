@@ -17,8 +17,8 @@ We would like to calculate the overall and period efficiency of each city in Tai
 
 
 ## 2 Methodology
-Based on Dynamic DEA: A slack-based measure approach published by Tone and tsutsui [[3]](#3), we first construct a model according to the paper, and then deal with bad output by by-production method instead of considering it as free disposable inputs.
-we also try to calculate Malmquist-Luenberger Index to find out the efficiency change through the periods.
+We first construct a model based on Dynamic DEA: A slack-based measure approach published by Tone and tsutsui [[3]](#3), and then deal with bad output by by-production method instead of considering it as free disposable inputs.  
+We also try to calculate Malmquist-Luenberger Index to find out the efficiency change through the periods.
 
 
 ### 2.1 Dynamic SBM: consider bad output as free disposable input
@@ -27,7 +27,7 @@ we also try to calculate Malmquist-Luenberger Index to find out the efficiency c
 $i$: input  
 $j$: output  
 $k$: DMU  
-$t$: period
+$t$: period  
 $l$: carry-over
 
 #### Sets
@@ -36,10 +36,11 @@ $I^P$: pollution-causing inputs
 $J^N$: good outputs  
 $J^P$: bad outputs  
 $K$: DMUs  
-$T$: periods
+$T$: periods. 
 $L_free$: free carry-overs
 
 #### Parameters
+
 $X^{t}_{ki}$: ith input of DMU k at period $t$  
 $Y^{t}_{kj}$: jth good output of DMU k at period $t$  
 $B^{t}_{kj}$: jth bad output of DMU k at period $t$
@@ -60,6 +61,15 @@ $\tau$: for linearizing the NLP
 #### Model
 
 
+Below is a general form of DDF in the paper.  
+We called the constraint(1)(2) **Input Constraint**, and (1) use the X we want to consider in the model. The same as the following constraints, so constraint(3)(4) are **Desirable Output Constraint**, and constraint(5)(6) are **Undesirable Output Constraint**. Constraint(1)(3)(5) are the X,Y,B we want to consider, on the contrary, constraint(2)(4)(6) are those we don't sonsider in the model. The last constraint (7) is the **Convex-Combination Constraint**.
+
+Take a look at the <img src="https://latex.codecogs.com/svg.image?g^{Y_i}" /> and <img src="https://latex.codecogs.com/svg.image?g^{B_q}" /> in the constraint (3) and (5). They mean the direction that raw data will project to, and we can see that the efficiency is plused in Y and minused in B. For the opposite direction, it is because the undesirable output is a by-product of desirable output, and we want the desirable output higher while the undesirable output could be lower. But notice that the relation between desirable output and undesirable output is not trade-off. In fact, when we increase the desirable output, the undesirable output will increase simultaneously.
+
+
+
+
+In this study, we want to focus on one input (Coal), one output (Electricity), and three bad outputs(CO<sub>2</sub>,SO<sub>2</sub>,NO<sub>x</sub>) here, so we can simplify the model as:
 
 
 #### Source Code(python-gurobi)
@@ -341,6 +351,6 @@ In conclusion, We used dynamic SBM to analyze the efficiency of each period. Com
 <a id="1">[1]</a> 
 Li, Y., & Chen, Y. (2021). Development of an SBM-ML model for the measurement of green total factor productivity: The case of pearl river delta urban agglomeration. Renewable and Sustainable Energy Reviews, 145, 111131. <br>
 <a id="2">[2]</a> 
-Chung, Y. H., Färe, R., & Grosskopf, S. (1997). Productivity and undesirable outputs: a directional distance function approach. journal of Environmental Management, 51(3), 229-240. <br>
+Tone, K., Tsutsui, M., 2010. Dynamic DEA: A slack-based measure approach. Omega: Int. J. Manage. Sci. 38, 45–156. <br>
 <a id="3">[3]</a> 
-Tone, K., Tsutsui, M., 2010. Dynamic DEA: A slack-based measure approach. Omega: Int. J. Manage. Sci. 38, 45–156.
+Chung, Y. H., Färe, R., & Grosskopf, S. (1997). Productivity and undesirable outputs: a directional distance function approach. journal of Environmental Management, 51(3), 229-240.
