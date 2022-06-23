@@ -28,27 +28,21 @@ $t$: period
 $l$: carry-over
 
 #### Sets
-$I^N$: non-pollution-causing inputs  
-$I^P$: pollution-causing inputs  
-$J^N$: good outputs  
-$J^P$: bad outputs  
+$I$: inputs  
+$J$: outputs  
 $K$: DMUs  
 $T$: periods  
 $L_{free}$: free carry-overs
 
 #### Parameters
 $X^t_{ki}$: $i$ th input of DMU $k$ at period $t$  
-$Y^t_{kj}$: $j$ th good output of DMU $k$ at period $t$  
+$Y^t_{kj}$: $j$ th output of DMU $k$ at period $t$  
 
 #### Decision Variables
-$\lambda^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$ , multiply $ \tau$  
-$\mu^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$ , multiply $\tau$  
-$s_i^{tN-}$: slack of ith non-pollution-causing input at period $t$ , multiply $\tau$ (frontier of good output)  
-$s_j^{tN+}$: slack of jth good output at period $t$ , multiply $\tau$ (frontier of good output)  
-$s_i^{tGP-}$: slack of ith pollution-causing input at period $t$ , multiply $\tau$ (frontier of good output)  
-$s_j^{tP+}$: slack of jth bad output at period $t$ , multiply $\tau$ (frontier of bad output)  
-$s_i^{tBP-}$: slack of ith pollution-causing input at period $t$ , multiply $\tau$ (frontier of bad output)  
-$s^{free}_{it}$: slack of ith free carry-over at period $t$ , multiply $\tau$  
+$\lambda^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$ , multiply $\tau$  
+$s_i^{t-}$: slack of $i$ th input at period $t$ , multiply $\tau$  
+$s_j^{t+}$: slack of $j$ th output at period $t$ , multiply $\tau$  
+$s^{tC}_{l}$: slack of $l$ th free carry-over at period $t$ , multiply $\tau$  
 $\tau$: for linearizing the NLP
 
 #### Model
@@ -58,8 +52,9 @@ We called the constraint(1)(2) **Input Constraint**, and (1) use the X we want t
 
 Take a look at the <img src="https://latex.codecogs.com/svg.image?g^{Y_i}" /> and <img src="https://latex.codecogs.com/svg.image?g^{B_q}" /> in the constraint (3) and (5). They mean the direction that raw data will project to, and we can see that the efficiency is plused in Y and minused in B. For the opposite direction, it is because the undesirable output is a by-product of desirable output, and we want the desirable output higher while the undesirable output could be lower. But notice that the relation between desirable output and undesirable output is not trade-off. In fact, when we increase the desirable output, the undesirable output will increase simultaneously.
 
-<img width="427" alt="DSBM_free disposable input" src="https://user-images.githubusercontent.com/47711803/175358906-91200992-9a7c-43e4-b41b-56d1d7904d4a.png">
 
+
+<img width="435" alt="DSBM_free disposable input" src="https://user-images.githubusercontent.com/47711803/175364642-5fea9174-5b57-4e26-936f-df210d63a811.png">
 
 
 
@@ -165,24 +160,25 @@ $T$: periods
 $L_{free}$: free carry-overs
 
 #### Parameters
-$X^t_{ki}$: ith input of DMU k at period $t$  
-$Y^t_{kj}$: jth good output of DMU k at period $t$  
-$B^t_{kj}$: jth bad output of DMU k at period $t$
+$X^t_{ki}$: $i$ th input of DMU $k$ at period $t$  
+$Y^t_{kj}$: $j$ th good output of DMU $k$ at period $t$  
+$B^t_{kj}$: $j$ th bad output of DMU $k$ at period $t$
 
 #### Decision Variables
 $\lambda^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$, multiply $\tau$  
 $\mu^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$, multiply $\tau$  
-$s_i^{tN-}$: slack of ith non-pollution-causing input at period $t$, multiply $\tau$ (frontier of good output)  
-$s_j^{tN+}$: slack of jth good output at period $t$, multiply $\tau$ (frontier of good output)  
-$s_i^{tGP-}$: slack of ith pollution-causing input at period $t$, multiply $\tau$ (frontier of good output)  
-$s_j^{tP+}$: slack of jth bad output at period $t$, multiply $\tau$ (frontier of bad output)  
-$s_i^{tBP-}$: slack of ith pollution-causing input at period $t$, multiply $\tau$(frontier of bad output)  
-$s^{free}_{it}$: slack of ith free carry-over at period $t$, multiply $\tau$  
+$s_i^{tN-}$: slack of $i$ th non-pollution-causing input at period $t$, multiply $\tau$ (frontier of good output)  
+$s_j^{tN+}$: slack of $j$ th good output at period $t$, multiply $\tau$ (frontier of good output)  
+$s_i^{tGP-}$: slack of $i$ th pollution-causing input at period $t$, multiply $\tau$ (frontier of good output)  
+$s_j^{tP+}$: slack of $j$ th bad output at period $t$, multiply $\tau$ (frontier of bad output)  
+$s_i^{tBP-}$: slack of $i$ th pollution-causing input at period $t$, multiply $\tau$(frontier of bad output)  
+$s^{tC}_{l}$: slack of $i$ th free carry-over at period $t$, multiply $\tau$  
 $\tau$: for linearizing the NLP
 
 #### Model
+<img width="491" alt="DSBM_by-production" src="https://user-images.githubusercontent.com/47711803/175364674-e60a1a80-3142-460b-8a8a-9fa550bb99e5.png">
 
-<img width="485" alt="DSBM_by-production" src="https://user-images.githubusercontent.com/47711803/175358935-b72183b3-a661-41e4-ba94-54e8c1bd54cf.png">
+
 
 
 
