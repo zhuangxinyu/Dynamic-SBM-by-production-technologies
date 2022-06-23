@@ -37,8 +37,8 @@ $T$: periods
 $L_{free}$: free carry-overs
 
 #### Parameters
-$X^t_{ki}$: $i$th input of DMU $k$ at period $t$  
-$Y^t_{kj}$: $j$th good output of DMU $k$ at period $t$  
+$X^t_{ki}$: $i$ th input of DMU $k$ at period $t$  
+$Y^t_{kj}$: $j$ th good output of DMU $k$ at period $t$  
 
 #### Decision Variables
 $\lambda^t_k$: the intensity weights of the linear combination between DMU $r$ and DMU $k$ at period $t$, multiply $\tau$  
