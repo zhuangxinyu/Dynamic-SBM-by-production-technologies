@@ -324,7 +324,7 @@ The next two of the examples were 宜蘭 and 臺東. In 宜蘭, we could see tha
 
 ### 3.4 Comparison between each area
 
-Although we had get the data and result of each city, the input or output, etc, could not be easily divided into cities in the real world case. The cities in the same area might interfere with each others. Thus, we had also experiment on the average period efficiency of each area. According to the result, 中部 and 南部 were the most efficient areas, for the reason that they were still developing rapidly. Also, 離島 and 東部 were the most inefficient ones, for the reason that they mostly depend on the tourism industry. Last, 北部 fell in the middle.
+Although we had get the data and result of each city, the input or output, etc., could not be easily divided into cities in the real world case. The cities in the same area might interfere with each others. Thus, we had also experiment on the average period efficiency of each area. According to the result, 中部 and 南部 were the most efficient areas, for the reason that they were still developing rapidly. Also, 離島 and 東部 were the most inefficient ones, for the reason that they mostly depend on the tourism industry. Last, 北部 fell in the middle.
 
 ![AreaPeriod.png](images/AreaPeriod.png)
 
