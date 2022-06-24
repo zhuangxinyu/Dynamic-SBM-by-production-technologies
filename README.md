@@ -303,14 +303,14 @@ After formulating our dynamic SBM with by-production technology, we got the over
 
 Below is the result of dynamice SBM with by-production technology.
 
-![DSBM_BP_result](images/DSBM_BP_result.png) (DSBM stands for the results of by-production Dynamice SBM)
+![DSBM_BP_result](images/DSBM_BP_result.png) (DSBM stands for the results from by-production Dynamice SBM)
 
 ### 3.3 Comparison between by-production and free disposable input
-We had also formulated the original dynamic SBM, which consider bad output as free disposable. The chart is about the comparison of our by-production and the free disposable method, the x coordinate is each DMU, and the y coordinate is the overall efficiency. Most of the cities got lower overall efficiency by our method, which show by using our model, we can get a more precise estimation of the efficiency, and the variance of each city was shown more clearly by our method, also. Thus, we can differentiate efficient cites from inefficiency cities.
+We had also formulated the original dynamic SBM, which consider bad output as free disposable. The chart is about the comparison of our by-production and the free disposable method, the x coordinate is each DMU, and the y coordinate is the overall efficiency. Most of the cities got lower overall efficiency by our method, which show by using our model, we could get a more precise estimation of the efficiency, and the variance of each city was shown more clearly by our method, also. Thus, we could differentiate efficient cites from inefficiency ones.
 
 ![Overall.png](images/Overall.png)
 
-After estimating the overall efficiency of each city, we had also derived deeper into the efficiency of each city in each year, to get more insight, and we had selected four cities as examples. 
+After estimating the overall efficiency of each city, we had also derived deeper into the efficiency of each city in each year, to get further insight, and we had selected four cities as examples. 
 
 The two of them were 彰化 and 金門. In the free disposable method, the result might lead to the conclusion that they were both efficient, and we could hardly see the increase or decrease from year to year. On the other hand, using the by-production model, we could see that actually, 彰化 was more efficient than 金門, and 彰化 was the most efficient one and 金門 was the most inefficient one according to the overall efficiency. Also, according to the result we got from our by-production model, we could actually show the change in efficiency in each year, to help further analysis for the government. However, if we consider the original free-disposable method, we could only infer that the two cities were both efficient in each year.
 
@@ -324,7 +324,7 @@ The next two of the examples were 宜蘭 and 臺東. In 宜蘭, we could see tha
 
 ### 3.4 Comparison between each area
 
-Although we had get the data and result of each city, the input or output, etc, could not be easily divided into cities in the real world situation. The cities in the same area might interfere with each others. Thus, we had also experiment on the average period efficiency of each area. According to the result, 中部 and 南部 were the most efficient, for the reason that they were still developing rapidly. Also, 離島 and 東部 were the most inefficient, for the reason that they mostly depend on the tourism industry. Last, 北部 fell in the middle.
+Although we had get the data and result of each city, the input or output, etc, could not be easily divided into cities in the real world case. The cities in the same area might interfere with each others. Thus, we had also experiment on the average period efficiency of each area. According to the result, 中部 and 南部 were the most efficient areas, for the reason that they were still developing rapidly. Also, 離島 and 東部 were the most inefficient ones, for the reason that they mostly depend on the tourism industry. Last, 北部 fell in the middle.
 
 ![AreaPeriod.png](images/AreaPeriod.png)
 
