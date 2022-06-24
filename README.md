@@ -317,14 +317,14 @@ The two of them were 彰化 and 金門. In the free disposable method, the resul
 ![彰化縣.png](images/彰化縣.png)
 ![金門縣.png](images/金門縣.png)
 
-The next two of the examples were 宜蘭 and 臺東. In 宜蘭, we could see that in 2017, it had a peak, and by our model, we could more clearly observer that, and the peak according to the raw data, although the GDP were not severely changed, but the tax had decreased, so it would show as a peak. In 臺東, we could see that by our model, it kept decreasing its efficiency, it could a good warning for 台東 to show that the efficiency of it has been actually decreasing, and it might work hard to come out with a solution to deal with it.
+The next two of the examples were 宜蘭 and 臺東. In 宜蘭, we could see that in 2017, it had a peak, and by using our model, we could more clearly observer that, and the peak according to the raw data, although the GDP were not severely changed, but the tax had decreased a lot, so it would shown as a peak. In 臺東, we could see that by our model, it kept decreasing its efficiency, it could be a good warning for 台東 to show that the efficiency of it has been actually decreasing, and it might have to work hard to come out with a solution to deal with it.
 
 ![宜蘭縣.png](images/宜蘭縣.png)
 ![臺東縣.png](images/臺東縣.png)
 
 ### 3.4 Comparison between each area
 
-Although we had get the data and result of each city, the input or output, etc, could not easily be divided into cities in the real world. The cities in the same area might interfere with each others. Thus, we had also experiment on the average period efficiency of each period. According to the result, 中部 and 南部 were the most efficient, for the reason that they were still developing rapidly. Also, 離島 and 東部 were the most inefficient, for the reason that they mostly depend on the tourism industry. Last, 北部 fell in the middle.
+Although we had get the data and result of each city, the input or output, etc, could not be easily divided into cities in the real world situation. The cities in the same area might interfere with each others. Thus, we had also experiment on the average period efficiency of each area. According to the result, 中部 and 南部 were the most efficient, for the reason that they were still developing rapidly. Also, 離島 and 東部 were the most inefficient, for the reason that they mostly depend on the tourism industry. Last, 北部 fell in the middle.
 
 ![AreaPeriod.png](images/AreaPeriod.png)
 
